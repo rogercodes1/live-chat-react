@@ -1,8 +1,22 @@
 import React, { Component } from 'react';
 import './App.css';
+import socketIOClient from 'socket.io-client';
 
 class App extends Component {
+  constructor(){
+    super()
+    this.state ={
+      endpoint : 'http://localhost:8000'
+    }
+  }
+
+  send = () => {
+    const socket = socketIOClient(this.state.endpoint)
+
+    socket.emit('change color', 'red')
+  }
   render() {
+    const socket = socketIOClient(this.state.endpoint)
     return (
       <div className="App">
         <header className="App-header">
